@@ -2,6 +2,13 @@
     Lab 26: Abstract your code from Lab 25. Run the experiment 15 times, and output the average run times of all the races.
         1. You're using a 2-D array to store your data in Lab 25; make it a 3-D array here.
         2. The second cube would hold counter variables and just subtotal the variables that are being recorded in the first cube.
+
+        Design decisions:
+            1. To run each race 15 times, I see two options with the way the program is currently written:
+                a. Create a heat for each group of races. For ex: heat1 = vector of read, sort, insert, and delete for each container.
+                b. Run each race 15 times in a row, accumulate results and store values to display.
+                --> Option b should be much easier to implement, but Option a is more in line with OOP principles and 
+                        is more similar to real life application.
 */
 
 #include <iostream>
@@ -45,6 +52,9 @@ int main()
     vector<double> sortRaceResults = SortRace(vecCodes, listCodes, setCodes);
     vector<double> insertRaceResults = InsertRace(vecCodes, listCodes, setCodes, INSERT_CODE);
     vector<double> deleteRaceResults = DeleteRace(vecCodes, listCodes, setCodes);
+
+    // run each race 15 times and average results for each container type
+    // create heats for each round of 
 
     // output results
     printf("%10s\t%10s\t%10s\t%10s\t\n", "Operation", "Vector (ms)", "List (ms)", "Set (ms)");
