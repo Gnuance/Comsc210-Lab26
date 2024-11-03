@@ -41,11 +41,13 @@ int main()
     vector<string> vecCodes = {};
     list<string> listCodes = {};
     set<string> setCodes = {};
-
     // file to read data from
     const string FILE_NAME = "codes.txt";
     // value to insert for race 3
     const string INSERT_CODE = "TESTCODE";
+
+    // accumulator & counter for racing averages added for Lab26
+    
 
     // off to the races. Record race results in local variables
     vector<double> readRaceResults = ReadRace(vecCodes, listCodes, setCodes, FILE_NAME);
