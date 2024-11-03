@@ -1,12 +1,7 @@
 /*
-    Lab 25: Which data structure is fastest? In each race, the contestants (a vector, list, and set) will all compete against each other.
-        1. There will be four various races! Write a program that will time, record, and report how long it takes each contestant to run these four races:
-            a. The first race is READING. The challenge is to read the 20,000 data elements into each of these data structures: vector, list, set
-            b. The second race is SORTING. Sort the vector and sort the list. Set the set's value to -1 since a set is already sorted.
-            c. The third race is INSERTING. Insert the value "TESTCODE" into the middle of the vector or the middle of the list, or into the set
-        2. Use the cool time features of the <chrono> library. You'll just be using a stopwatch on these operations.
-    Requirements:
-        1. Make your code scalable. It should be simple to add new races.
+    Lab 26: Abstract your code from Lab 25. Run the experiment 15 times, and output the average run times of all the races.
+        1. You're using a 2-D array to store your data in Lab 25; make it a 3-D array here.
+        2. The second cube would hold counter variables and just subtotal the variables that are being recorded in the first cube.
 */
 
 #include <iostream>
