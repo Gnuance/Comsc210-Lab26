@@ -7,7 +7,7 @@
             1. To run each race 15 times, I see two options with the way the program is currently written:
                 a. Create a heat for each group of races. For ex: heat1 = vector of read, sort, insert, and delete for each container.
                 b. Run each race 15 times in a row, accumulate results and store values to display.
-                --> Option b should be much easier to implement, but Option a is more in line with OOP principles and 
+                --> Option b should be much easier to implement, but Option a is more in line with OOP principles and
                         is more similar to real life application.
 */
 
@@ -48,7 +48,7 @@ int main()
 
     // accumulators & counter for racing averages added for Lab26
     const int NUMBER_OF_HEATS = 15;
-    vector<vector<double>> vecResults(4, vector<double>(3,0));
+    vector<vector<double>> vecResults(4, vector<double>(3, 0));
     vector<double> tempVec;
 
     // off to the races. Record race results in local variables
@@ -59,29 +59,40 @@ int main()
 
     // run each race 15 times and average results for each container type
     // create heats for each round of races
+    // get time totals
     for (int i = 0; i < NUMBER_OF_HEATS; i++)
     {
         // get race results
         tempVec = ReadRace(vecCodes, listCodes, setCodes, FILE_NAME);
-        transform(tempVec.begin(), tempVec.end(), vecResults.at(0).begin(), vecResults.at(0).begin(), [](double a, double b) { return a + b; });
-        
-        tempVec = SortRace(vecCodes, listCodes, setCodes);
-        transform(vecResults.at(1).begin(), vecResults.at(1).end(), tempVec.begin(), tempVec.begin(), [](double a, double b) { return a + b; });
+        transform(tempVec.begin(), tempVec.end(), vecResults.at(0).begin(), vecResults.at(0).begin(), [](double a, double b)
+                  { return a + b; });
 
-        tempVec = InsertRace(vecCodes, listCodes, setCodes, INSERT_CODE);        
-        transform(vecResults.at(2).begin(), vecResults.at(2).end(), tempVec.begin(), tempVec.begin(), [](double a, double b) { return a + b; });
+        tempVec = SortRace(vecCodes, listCodes, setCodes);
+        transform(tempVec.begin(), tempVec.end(), vecResults.at(1).begin(), vecResults.at(1).begin(), [](double a, double b)
+                  { return a + b; });
+
+        tempVec = InsertRace(vecCodes, listCodes, setCodes, INSERT_CODE);
+        transform(tempVec.begin(), tempVec.end(), vecResults.at(2).begin(), vecResults.at(2).begin(), [](double a, double b)
+                  { return a + b; });
 
         tempVec = DeleteRace(vecCodes, listCodes, setCodes);
-        transform(vecResults.at(3).begin(), vecResults.at(3).end(), tempVec.begin(), tempVec.begin(), [](double a, double b) { return a + b; });
+        transform(tempVec.begin(), tempVec.end(), vecResults.at(3).begin(), vecResults.at(3).begin(), [](double a, double b)
+                  { return a + b; });
     }
-    
+    // average race times
+    for (int i = 0; i < vecResults.size(); i++)
+    {
+        transform(vecResults.at(i).begin(), vecResults.at(i).end(), vecResults.at(i).begin(), [](double n)
+                  { return n / NUMBER_OF_HEATS; });
+    }
 
     // output results
+    printf("After %2d heats, average scores are:", NUMBER_OF_HEATS);
     printf("%10s\t%10s\t%10s\t%10s\t\n", "Operation", "Vector (ms)", "List (ms)", "Set (ms)");
-    printf("%10s\t%10f\t%10f\t%10f\t\n", "Read", vecResults.at(0).at(0), vecResults.at(1).at(1), vecResults.at(2).at(2));
-    // printf("%10s\t%10f\t%10f\t%10f\t\n", "Sort", sortRaceResults.at(0), sortRaceResults.at(1), sortRaceResults.at(2));
-    // printf("%10s\t%10f\t%10f\t%10f\t\n", "Insert", insertRaceResults.at(0), insertRaceResults.at(1), insertRaceResults.at(2));
-    // printf("%10s\t%10f\t%10f\t%10f\t\n", "Delete", deleteRaceResults.at(0), deleteRaceResults.at(1), deleteRaceResults.at(2));
+    printf("%10s\t%10f\t%10f\t%10f\t\n", "Read", vecResults.at(0).at(0), vecResults.at(0).at(1), vecResults.at(0).at(2));
+    printf("%10s\t%10f\t%10f\t%10f\t\n", "Sort", vecResults.at(1).at(0), vecResults.at(1).at(1), vecResults.at(1).at(2));
+    printf("%10s\t%10f\t%10f\t%10f\t\n", "Insert", vecResults.at(2).at(0), vecResults.at(2).at(1), vecResults.at(2).at(2));
+    printf("%10s\t%10f\t%10f\t%10f\t\n", "Delete", vecResults.at(3).at(0), vecResults.at(3).at(1), vecResults.at(3).at(2));
 
     return 0;
 }
@@ -158,7 +169,7 @@ vector<double> SortRace(vector<string> &vecCodes, list<string> &listCodes, set<s
     elapsed = timerEnd - timerStart;
     results.push_back(elapsed.count());
 
-    results.push_back(-1); // set is already sorted
+    results.push_back(0); // set is already sorted
     return results;
 }
 
