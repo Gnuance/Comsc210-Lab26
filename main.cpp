@@ -63,20 +63,25 @@ int main()
     {
         // get race results
         tempVec = ReadRace(vecCodes, listCodes, setCodes, FILE_NAME);
-         vecResults.at(0)
-        vecResults.push_back(ReadRace(vecCodes, listCodes, setCodes, FILE_NAME));
-        vecResults.push_back(SortRace(vecCodes, listCodes, setCodes));
-        vecResults.push_back(InsertRace(vecCodes, listCodes, setCodes, INSERT_CODE));
-        vecResults.push_back(DeleteRace(vecCodes, listCodes, setCodes));
+        transform(vecResults.at(0).begin(), vecResults.at(0).end(), tempVec.begin(), tempVec.begin(), [](double a, double b) { return a + b; });
+        
+        tempVec = SortRace(vecCodes, listCodes, setCodes);
+        transform(vecResults.at(1).begin(), vecResults.at(1).end(), tempVec.begin(), tempVec.begin(), [](double a, double b) { return a + b; });
+
+        tempVec = InsertRace(vecCodes, listCodes, setCodes, INSERT_CODE);        
+        transform(vecResults.at(2).begin(), vecResults.at(2).end(), tempVec.begin(), tempVec.begin(), [](double a, double b) { return a + b; });
+
+        tempVec = DeleteRace(vecCodes, listCodes, setCodes);
+        transform(vecResults.at(3).begin(), vecResults.at(3).end(), tempVec.begin(), tempVec.begin(), [](double a, double b) { return a + b; });
     }
     
 
     // output results
     printf("%10s\t%10s\t%10s\t%10s\t\n", "Operation", "Vector (ms)", "List (ms)", "Set (ms)");
-    printf("%10s\t%10f\t%10f\t%10f\t\n", "Read", readRaceResults.at(0), readRaceResults.at(1), readRaceResults.at(2));
-    printf("%10s\t%10f\t%10f\t%10f\t\n", "Sort", sortRaceResults.at(0), sortRaceResults.at(1), sortRaceResults.at(2));
-    printf("%10s\t%10f\t%10f\t%10f\t\n", "Insert", insertRaceResults.at(0), insertRaceResults.at(1), insertRaceResults.at(2));
-    printf("%10s\t%10f\t%10f\t%10f\t\n", "Delete", deleteRaceResults.at(0), deleteRaceResults.at(1), deleteRaceResults.at(2));
+    printf("%10s\t%10f\t%10f\t%10f\t\n", "Read", vecResults.at(0).at(0), vecResults.at(1).at(1), vecResults.at(2).at(2));
+    // printf("%10s\t%10f\t%10f\t%10f\t\n", "Sort", sortRaceResults.at(0), sortRaceResults.at(1), sortRaceResults.at(2));
+    // printf("%10s\t%10f\t%10f\t%10f\t\n", "Insert", insertRaceResults.at(0), insertRaceResults.at(1), insertRaceResults.at(2));
+    // printf("%10s\t%10f\t%10f\t%10f\t\n", "Delete", deleteRaceResults.at(0), deleteRaceResults.at(1), deleteRaceResults.at(2));
 
     return 0;
 }
