@@ -47,28 +47,24 @@ int main()
     const string INSERT_CODE = "TESTCODE";
 
     // accumulators & counter for racing averages added for Lab26
-    const int NUMBER_OF_RACES = 15;
+    const int NUMBER_OF_HEATS = 15;
     vector<vector<double>> vecResults;
-    double arrResults[4][3] = {0};
 
     // off to the races. Record race results in local variables
-    vector<double> readRaceResults = ReadRace(vecCodes, listCodes, setCodes, FILE_NAME);
-    vector<double> sortRaceResults = SortRace(vecCodes, listCodes, setCodes);
-    vector<double> insertRaceResults = InsertRace(vecCodes, listCodes, setCodes, INSERT_CODE);
-    vector<double> deleteRaceResults = DeleteRace(vecCodes, listCodes, setCodes);
+    // vector<double> readRaceResults = ReadRace(vecCodes, listCodes, setCodes, FILE_NAME);
+    // vector<double> sortRaceResults = SortRace(vecCodes, listCodes, setCodes);
+    // vector<double> insertRaceResults = InsertRace(vecCodes, listCodes, setCodes, INSERT_CODE);
+    // vector<double> deleteRaceResults = DeleteRace(vecCodes, listCodes, setCodes);
 
     // run each race 15 times and average results for each container type
     // create heats for each round of races
-    for (int i = 0; i < NUMBER_OF_RACES; i++)
+    for (int i = 0; i < NUMBER_OF_HEATS; i++)
     {
         // get race results
-        readRaceResults = ReadRace(vecCodes, listCodes, setCodes, FILE_NAME);
-        sortRaceResults = SortRace(vecCodes, listCodes, setCodes);
-        insertRaceResults = InsertRace(vecCodes, listCodes, setCodes, INSERT_CODE);
-        deleteRaceResults = DeleteRace(vecCodes, listCodes, setCodes);
-
-        // accumulate results
-        arrResults[0][0]
+        vecResults.push_back(ReadRace(vecCodes, listCodes, setCodes, FILE_NAME));
+        vecResults.push_back(SortRace(vecCodes, listCodes, setCodes));
+        vecResults.push_back(InsertRace(vecCodes, listCodes, setCodes, INSERT_CODE));
+        vecResults.push_back(DeleteRace(vecCodes, listCodes, setCodes));
     }
     
 
