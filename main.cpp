@@ -48,7 +48,8 @@ int main()
 
     // accumulators & counter for racing averages added for Lab26
     const int NUMBER_OF_HEATS = 15;
-    vector<vector<double>> vecResults;
+    vector<vector<double>> vecResults(4, vector<double>(3,0));
+    vector<double> tempVec;
 
     // off to the races. Record race results in local variables
     // vector<double> readRaceResults = ReadRace(vecCodes, listCodes, setCodes, FILE_NAME);
@@ -61,6 +62,8 @@ int main()
     for (int i = 0; i < NUMBER_OF_HEATS; i++)
     {
         // get race results
+        tempVec = ReadRace(vecCodes, listCodes, setCodes, FILE_NAME);
+         vecResults.at(0)
         vecResults.push_back(ReadRace(vecCodes, listCodes, setCodes, FILE_NAME));
         vecResults.push_back(SortRace(vecCodes, listCodes, setCodes));
         vecResults.push_back(InsertRace(vecCodes, listCodes, setCodes, INSERT_CODE));
