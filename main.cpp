@@ -63,7 +63,7 @@ int main()
     {
         // get race results
         tempVec = ReadRace(vecCodes, listCodes, setCodes, FILE_NAME);
-        transform(vecResults.at(0).begin(), vecResults.at(0).end(), tempVec.begin(), tempVec.begin(), [](double a, double b) { return a + b; });
+        transform(tempVec.begin(), tempVec.end(), vecResults.at(0).begin(), vecResults.at(0).begin(), [](double a, double b) { return a + b; });
         
         tempVec = SortRace(vecCodes, listCodes, setCodes);
         transform(vecResults.at(1).begin(), vecResults.at(1).end(), tempVec.begin(), tempVec.begin(), [](double a, double b) { return a + b; });
