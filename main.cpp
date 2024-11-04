@@ -20,7 +20,7 @@
 #include <list>
 #include <set>
 #include <fstream>   // file
-#include <algorithm> // sort
+#include <algorithm> // sort, transform
 using namespace std;
 using namespace std::chrono; // so chrono:: doesn't have to be used over and over again
 
@@ -50,12 +50,6 @@ int main()
     const int NUMBER_OF_HEATS = 15;
     vector<vector<double>> vecResults(4, vector<double>(3, 0));
     vector<double> tempVec;
-
-    // off to the races. Record race results in local variables
-    // vector<double> readRaceResults = ReadRace(vecCodes, listCodes, setCodes, FILE_NAME);
-    // vector<double> sortRaceResults = SortRace(vecCodes, listCodes, setCodes);
-    // vector<double> insertRaceResults = InsertRace(vecCodes, listCodes, setCodes, INSERT_CODE);
-    // vector<double> deleteRaceResults = DeleteRace(vecCodes, listCodes, setCodes);
 
     // run each race 15 times and average results for each container type
     // create heats for each round of races
@@ -87,12 +81,12 @@ int main()
     }
 
     // output results
-    printf("After %2d heats, average scores are:", NUMBER_OF_HEATS);
+    printf("After %2d heats, average scores are:\n", NUMBER_OF_HEATS);
     printf("%10s\t%10s\t%10s\t%10s\t\n", "Operation", "Vector (ms)", "List (ms)", "Set (ms)");
-    printf("%10s\t%10f\t%10f\t%10f\t\n", "Read", vecResults.at(0).at(0), vecResults.at(0).at(1), vecResults.at(0).at(2));
-    printf("%10s\t%10f\t%10f\t%10f\t\n", "Sort", vecResults.at(1).at(0), vecResults.at(1).at(1), vecResults.at(1).at(2));
-    printf("%10s\t%10f\t%10f\t%10f\t\n", "Insert", vecResults.at(2).at(0), vecResults.at(2).at(1), vecResults.at(2).at(2));
-    printf("%10s\t%10f\t%10f\t%10f\t\n", "Delete", vecResults.at(3).at(0), vecResults.at(3).at(1), vecResults.at(3).at(2));
+    printf("%10s\t%11.2f\t%10.2f\t%10.2f\t\n", "Read", vecResults.at(0).at(0), vecResults.at(0).at(1), vecResults.at(0).at(2));
+    printf("%10s\t%11.2f\t%10.2f\t%10.2f\t\n", "Sort", vecResults.at(1).at(0), vecResults.at(1).at(1), vecResults.at(1).at(2));
+    printf("%10s\t%11.2f\t%10.2f\t%10.2f\t\n", "Insert", vecResults.at(2).at(0), vecResults.at(2).at(1), vecResults.at(2).at(2));
+    printf("%10s\t%11.2f\t%10.2f\t%10.2f\t\n", "Delete", vecResults.at(3).at(0), vecResults.at(3).at(1), vecResults.at(3).at(2));
 
     return 0;
 }
